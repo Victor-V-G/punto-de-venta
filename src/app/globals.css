@@ -1,4 +1,7 @@
 
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@400,500,700&display=swap');
+
+
 *{
     box-sizing: border-box;
     padding: 0;
@@ -7,6 +10,7 @@
 
 
 html{
+    font-family: 'General Sans', sans-serif;
     height: 100%;
 }
 
@@ -32,36 +36,36 @@ body{
 .header{
     display: grid;
     grid-area: header;
-    background-color: #535a73;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #EBECF2;
 }
 
 
 .main{
     display: grid;
     grid-area: main;
+    background-color: #EBECF2;
 }
 
 
 .footer{
     display: grid;
     grid-area: footer;
-    
+    background-color: #EBECF2;
 }
 
 
 .aside{
     display: grid;
     grid-area: aside;
-    background-color: rgb(221, 219, 219);
+    background-color: #fff;
 }
-
 
 
 .aside-content{
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 
@@ -95,4 +99,31 @@ body{
         grid-template-rows: 80px auto 80px;
     }
 }
+
+
+
+.sidebar-button{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  background-color: white;
+  border: #EBECF2;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border 0.3s ease;
+  width: 100%; /* opcional: ocupar todo el ancho del menú */
+
+}
+
+.sidebar-button:hover {
+  border: #EBECF2; /* borde rojo al pasar el mouse */
+  background-color: #EBECF2; /* opcional: fondo tenue rojizo al hover */
+}
+
+.sidebarImg{
+    width: 24px;
+    height: 24px;
+}
+
 
