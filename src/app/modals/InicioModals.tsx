@@ -1,13 +1,18 @@
-import { ModalsInterface } from "../interfaces/ModalsInterface";
+'use client'
 import InicioComponent from "../components/Inicio/InicioComponent";
+import { PropsExtendsModalsSidebar } from "../interfaces/extends/PropsExtendsModalsSidebar";
 
-export const InicioModals = ({isOpen} : ModalsInterface)=>{
+
+export const InicioModals = ({isOpen, setIsOpenInicio, setIsOpenVenta} : PropsExtendsModalsSidebar)=>{
     if (isOpen == false){
         return null
     } else {
         return (
             <div>
-                <InicioComponent/>
+                <InicioComponent
+                    setIsOpenInicio={setIsOpenInicio}
+                    setIsOpenVenta={setIsOpenVenta}
+                />
             </div>
         )
     }

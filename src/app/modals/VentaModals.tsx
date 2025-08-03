@@ -1,5 +1,5 @@
 import { ModalsInterface } from "../interfaces/ModalsInterface";
-
+import VentaComponent from "../components/Venta/VentaComponent";
 
 export const VentaModals = ({isOpen} : ModalsInterface)=>{
     if (isOpen == false){
@@ -7,7 +7,7 @@ export const VentaModals = ({isOpen} : ModalsInterface)=>{
     } else {
         return (
             <div>
-                <h1>VENTA</h1>
+                <VentaComponent/>
             </div>
         )
     }

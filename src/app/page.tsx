@@ -19,9 +19,7 @@ export default function Home() {
   return (
     <div className='grid-container'>
       <header className='header'>
-        <div className='header-content'>
-          <h1>PUNTO DE VENTA</h1>
-        </div>
+        <div className='header-content'></div>
       </header>
       <aside className='aside'>
         <div className='aside-content'>
@@ -94,6 +92,8 @@ export default function Home() {
           <InicioModals
             isOpen={IsOpenInicio}
             setClose={()=>setIsOpenInicio(false)}
+            setIsOpenInicio={setIsOpenInicio}
+            setIsOpenVenta={setIsOpenVenta}
           />
           <VentaModals
             isOpen={IsOpenVenta}
@@ -110,9 +110,7 @@ export default function Home() {
         </div>
       </main>
       <footer className='footer'>
-        <div className='footer-content'>
-          <h1>FOOTER</h1>
-        </div>
+        <div className='footer-content'></div>
       </footer>
     </div>
   );
