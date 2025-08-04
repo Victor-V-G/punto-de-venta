@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MenuGestionarTienda from "../components/Gestion/MenuGestionarTienda";
 import { PasswordInterface } from "../interfaces/PasswordInterface";
 import { ValidPropsExtends } from "../interfaces/extends/ValidPropsExtends";
@@ -20,6 +20,11 @@ export const GestionarProductosModals = ({isOpen, Valid, setValid} : ValidPropsE
     }
 
     const handleCheck = ()=>{
+        if (password.password.trim() === ""){
+            alert("Ingrese una contraseña")
+            setValid(false)
+        }
+
         if (password.password === '123'){
             alert("contraseña correcta")
             setValid(true)
@@ -29,28 +34,48 @@ export const GestionarProductosModals = ({isOpen, Valid, setValid} : ValidPropsE
         }
     }
 
+    useEffect(() => {
+        if (Valid == false) {
+            setpassword(InitialStatePassword); 
+        }
+    }, [Valid]);
+
+    
     if (isOpen == false){
         return null
     } 
 
     if (Valid == true) {
         return <MenuGestionarTienda/>
-    }
+    } 
 
+
+    
     return (
-        <div>
-            <h1>hola {password.password}</h1>
-            <input 
-                type="text" 
-                name="password" 
-                placeholder="password"
-                onChange={(e)=>handlePassword(e.currentTarget.name,e.currentTarget.value)}
-            />
-            <button 
-                onClick={()=>{
-                    handleCheck()
-                }}>Ingresar
-            </button>
+        <div className="div-pwd-principal">
+            <div>
+                <h1>GESTIONAR TIENDA</h1> <br />
+                <h3>INGRESE LA CONTRASEÑA PARA ACCEDER AL PANEL</h3>
+            </div>
+
+            <div>
+                <label>Contraseña</label>
+                <input 
+                    type="text" 
+                    name="password" 
+                    placeholder="ingresa la contraseña"
+                    className="pwd-input"
+                    onChange={(e)=>handlePassword(e.currentTarget.name,e.currentTarget.value)}
+                />
+                <span>{}</span>
+                <button
+                    className="pwd-button"
+                    onClick={()=>{
+                        handleCheck()
+                    }}>Ingresar
+                </button>
+            </div>
+
         </div>
     )
 } 

@@ -122,3 +122,48 @@ body{
 }
 
 
+
+
+.div-pwd-principal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 17px;
+}
+
+.pwd-input{
+  width: 100%;
+  padding: 12px 40px 12px 10px;
+  font-size: 14px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.pwd-button{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 25px;
+    background-color: white;
+    border: 1px solid #EBECF2;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 14rem; /* Tamaño fijo */
+    height: 30px; /* Opcional: mismo alto */
+    font-size: 16px;
+    font-weight: bold;
+    flex-direction: column;
+    gap: 1.3rem;
+
+}
+
+.pwd-button:hover{
+    border: #EBECF2;
+    background-color: #c8c8c8;
+}
