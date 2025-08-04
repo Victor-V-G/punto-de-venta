@@ -2,20 +2,24 @@
 import homeImg from './assets/img/home.png'
 import cartImg from './assets/img/cart.png'
 import packageImg from './assets/img/package.png'
-import clipboardImg from './assets/img/clipboard-detail.png'
+import storeImg from './assets/img/store-alt-2.png'
+import billImg from './assets/img/file-detail.png'
 import Image from 'next/image';
 import { useState } from 'react'
 import VentaModals from './modals/VentaModals'
 import InicioModals from './modals/InicioModals'
 import GestionarProductosModals from './modals/GestionarProductosModals'
 import VerStockModals from './modals/VerStockModals'
+import HistorialDeVentaModals from './modals/HistorialDeVentaModals'
+
 
 export default function Home() {
   const [IsOpenInicio, setIsOpenInicio] = useState(true)
   const [IsOpenVenta, setIsOpenVenta] = useState(false)
   const [IsOpenGestionarProductos, setIsOpenGestionarProductos] = useState(false)
   const [IsOpenVerStock, setIsOpenVerStock] = useState(false)
-
+  const [IsOpenHistorialDeVenta, setIsOpenHistorialDeVenta] = useState(false)
+  const [Valid, setValid] = useState(false);
   return (
     <div className='grid-container'>
       <header className='header'>
@@ -31,6 +35,8 @@ export default function Home() {
                 setIsOpenVenta(false);
                 setIsOpenGestionarProductos(false);
                 setIsOpenVerStock(false);
+                setIsOpenHistorialDeVenta(false);   
+                setValid(false)       
               }}>
               <Image
                 className='sidebarImg'
@@ -46,6 +52,8 @@ export default function Home() {
                 setIsOpenInicio(false); 
                 setIsOpenGestionarProductos(false);
                 setIsOpenVerStock(false);
+                setIsOpenHistorialDeVenta(false);
+                setValid(false)              
               }}>
               <Image
                 className='sidebarImg'
@@ -57,32 +65,52 @@ export default function Home() {
             <button 
               className='sidebar-button'
               onClick={()=>{
-                setIsOpenGestionarProductos(true);
+                setIsOpenVerStock(true);
                 setIsOpenInicio(false);
                 setIsOpenVenta(false);
-                setIsOpenVerStock(false);
+                setIsOpenHistorialDeVenta(false);
+                setIsOpenGestionarProductos(false);
+                setValid(false)                  
               }}>
               <Image
                 className='sidebarImg'
                 src={packageImg}
-                alt='package'              
-              />          
-              <span>GESTIONAR PRODUCTOS</span> 
+                alt='clipboard'              
+              />
+              <span>VER STOCK</span>
             </button> <br />
             <button 
               className='sidebar-button'
               onClick={()=>{
-                setIsOpenVerStock(true);
+                setIsOpenHistorialDeVenta(true);
                 setIsOpenInicio(false);
                 setIsOpenVenta(false);
+                setIsOpenVerStock(false);
                 setIsOpenGestionarProductos(false);
+                setValid(false)  
               }}>
               <Image
                 className='sidebarImg'
-                src={clipboardImg}
-                alt='clipboard'              
+                src={billImg}
+                alt='bill'              
               />
-              <span>VER STOCK</span>
+              <span>HISTORIAL DE VENTA</span>
+            </button> <br />       
+            <button 
+              className='sidebar-button'
+              onClick={()=>{
+                setIsOpenGestionarProductos(true);
+                setIsOpenInicio(false);
+                setIsOpenVenta(false);
+                setIsOpenVerStock(false);
+                setIsOpenHistorialDeVenta(false);
+              }}>
+              <Image
+                className='sidebarImg'
+                src={storeImg}
+                alt='package'              
+              />          
+              <span>GESTIONAR PRODUCTOS</span> 
             </button> <br />
           </nav>
         </div>
@@ -94,18 +122,27 @@ export default function Home() {
             setClose={()=>setIsOpenInicio(false)}
             setIsOpenInicio={setIsOpenInicio}
             setIsOpenVenta={setIsOpenVenta}
+            setIsOpenStock={setIsOpenVerStock}
+            setIsOpenHistorialDeVenta={setIsOpenHistorialDeVenta}
+            setIsOpenGestionarProductos={setIsOpenGestionarProductos}
           />
           <VentaModals
             isOpen={IsOpenVenta}
             setClose={()=>setIsOpenVenta(false)}
           />
-          <GestionarProductosModals
-            isOpen={IsOpenGestionarProductos}
-            setClose={()=>setIsOpenGestionarProductos(false)}
-          />
           <VerStockModals
             isOpen={IsOpenVerStock}
             setClose={()=>setIsOpenVerStock(false)}
+          />
+          <HistorialDeVentaModals
+            isOpen={IsOpenHistorialDeVenta}
+            setClose={()=>setIsOpenHistorialDeVenta(false)}
+          />
+          <GestionarProductosModals
+            isOpen={IsOpenGestionarProductos}
+            setClose={()=>setIsOpenGestionarProductos(false)}
+            Valid={Valid}
+            setValid={setValid}
           />
         </div>
       </main>

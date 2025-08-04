@@ -6,7 +6,7 @@ import packageImg from './assets/img/paquete-o-empaquetar.png'
 import stockImg from './assets/img/reporte.png'
 import { SidebarPropsInterface } from '@/app/interfaces/SidebarPropsInterface';
 
-export const InicioComponent = ({setIsOpenInicio, setIsOpenVenta}: SidebarPropsInterface) => {
+export const InicioComponent = ({setIsOpenInicio, setIsOpenVenta, setIsOpenStock, setIsOpenGestionarProductos ,setIsOpenHistorialDeVenta}: SidebarPropsInterface) => {
 
     return (
         <div className='div-inicio-principal'>
@@ -22,6 +22,9 @@ export const InicioComponent = ({setIsOpenInicio, setIsOpenVenta}: SidebarPropsI
                         onClick={()=>{
                             setIsOpenVenta(true);
                             setIsOpenInicio(false);
+                            setIsOpenStock(false);
+                            setIsOpenHistorialDeVenta(false);
+                            setIsOpenGestionarProductos(false);
                         }}>
                         <Image
                             className='acceso-rapido-img'
@@ -32,7 +35,15 @@ export const InicioComponent = ({setIsOpenInicio, setIsOpenVenta}: SidebarPropsI
                     </button>
                 </div>
                 <div>
-                    <button className='acceso-rapido-boton'>
+                    <button 
+                        className='acceso-rapido-boton'
+                        onClick={()=>{
+                            setIsOpenStock(true);
+                            setIsOpenInicio(false);
+                            setIsOpenVenta(false)
+                            setIsOpenHistorialDeVenta(false);
+                            setIsOpenGestionarProductos(false);
+                        }}>
                         <Image
                             className='acceso-rapido-img'
                             src={packageImg}
@@ -42,7 +53,15 @@ export const InicioComponent = ({setIsOpenInicio, setIsOpenVenta}: SidebarPropsI
                     </button>
                 </div>
                 <div>
-                    <button className='acceso-rapido-boton'>
+                    <button 
+                        className='acceso-rapido-boton'
+                        onClick={()=>{
+                            setIsOpenHistorialDeVenta(true);
+                            setIsOpenInicio(false);
+                            setIsOpenVenta(false);
+                            setIsOpenStock(false)
+                            setIsOpenGestionarProductos(false);
+                        }}>
                         <Image
                             className='acceso-rapido-img'
                             src={stockImg}

@@ -3,7 +3,7 @@ import InicioComponent from "../components/Inicio/InicioComponent";
 import { PropsExtendsModalsSidebar } from "../interfaces/extends/PropsExtendsModalsSidebar";
 
 
-export const InicioModals = ({isOpen, setIsOpenInicio, setIsOpenVenta} : PropsExtendsModalsSidebar)=>{
+export const InicioModals = ({isOpen, setIsOpenInicio, setIsOpenVenta, setIsOpenStock, setIsOpenHistorialDeVenta, setIsOpenGestionarProductos} : PropsExtendsModalsSidebar)=>{
     if (isOpen == false){
         return null
     } else {
@@ -12,6 +12,9 @@ export const InicioModals = ({isOpen, setIsOpenInicio, setIsOpenVenta} : PropsEx
                 <InicioComponent
                     setIsOpenInicio={setIsOpenInicio}
                     setIsOpenVenta={setIsOpenVenta}
+                    setIsOpenStock={setIsOpenStock}
+                    setIsOpenHistorialDeVenta={setIsOpenHistorialDeVenta}
+                    setIsOpenGestionarProductos={setIsOpenGestionarProductos}
                 />
             </div>
         )

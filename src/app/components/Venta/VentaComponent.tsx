@@ -1,4 +1,5 @@
 'use client'
+
 export const VentaComponent = ()=>{
     return (
         <div>

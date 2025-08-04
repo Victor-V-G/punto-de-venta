@@ -1,0 +1,49 @@
+
+.div-menu-principal{
+    margin-top: 20px;
+}
+
+.main-menu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.nav-acceso-rapido-menu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    gap: 3rem;
+}
+
+.acceso-rapido-boton-menu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 35px;
+    background-color: white;
+    border: 1px solid #EBECF2;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 250px; /* Tamaño fijo */
+    height: 180px; /* Opcional: mismo alto */
+    font-size: 16px;
+    font-weight: bold;
+    flex-direction: column;
+    gap: 1.3rem;
+}
+
+.acceso-rapido-boton-menu:hover{
+    border: #EBECF2;
+    background-color: #c8c8c8;
+}
+
+
+.acceso-rapido-img-menu{
+    width: 50px;
+    height: 50px;
+}
