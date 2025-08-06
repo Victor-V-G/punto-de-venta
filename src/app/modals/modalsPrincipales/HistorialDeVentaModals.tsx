@@ -1,5 +1,5 @@
 'use client'
-import { ModalsInterface } from "../interfaces/ModalsInterface";
+import { ModalsInterface } from "../../interfaces/ModalsInterface";
 
 export const HistorialDeVentaModals = ({isOpen}: ModalsInterface)=>{
     if (isOpen == false){

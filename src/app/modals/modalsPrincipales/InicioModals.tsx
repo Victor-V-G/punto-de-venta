@@ -1,6 +1,6 @@
 'use client'
-import InicioComponent from "../components/Inicio/InicioComponent";
-import { PropsExtendsModalsSidebar } from "../interfaces/extends/PropsExtendsModalsSidebar";
+import InicioComponent from '@/app/components/Inicio/InicioComponent';
+import { PropsExtendsModalsSidebar } from '@/app/interfaces/extends/PropsExtendsModalsSidebar';
 
 
 export const InicioModals = ({isOpen, setIsOpenInicio, setIsOpenVenta, setIsOpenStock, setIsOpenHistorialDeVenta, setIsOpenGestionarProductos} : PropsExtendsModalsSidebar)=>{

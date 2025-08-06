@@ -6,11 +6,11 @@ import storeImg from './assets/img/store-alt-2.png'
 import billImg from './assets/img/file-detail.png'
 import Image from 'next/image';
 import { useState } from 'react'
-import VentaModals from './modals/VentaModals'
-import InicioModals from './modals/InicioModals'
-import GestionarProductosModals from './modals/GestionarProductosModals'
-import VerStockModals from './modals/VerStockModals'
-import HistorialDeVentaModals from './modals/HistorialDeVentaModals'
+import VentaModals from './modals/modalsPrincipales/VentaModals'
+import InicioModals from './modals/modalsPrincipales/InicioModals'
+import GestionarProductosModals from './modals/modalsPrincipales/GestionarProductosModals'
+import VerStockModals from './modals/modalsPrincipales/VerStockModals'
+import HistorialDeVentaModals from './modals/modalsPrincipales/HistorialDeVentaModals'
 
 
 export default function Home() {

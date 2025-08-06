@@ -1,5 +1,5 @@
-import { ModalsInterface } from "../interfaces/ModalsInterface";
-import VentaComponent from "../components/Venta/VentaComponent";
+import { ModalsInterface } from "@/app/interfaces/ModalsInterface";
+import VentaComponent from "@/app/components/Venta/VentaComponent";
 
 export const VentaModals = ({isOpen} : ModalsInterface)=>{
     if (isOpen == false){
