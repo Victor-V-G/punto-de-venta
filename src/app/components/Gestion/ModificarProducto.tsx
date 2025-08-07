@@ -1,8 +1,12 @@
 'use client'
+
+import MostrarProducto from "./MenuGestion/ModificarProducto/MostrarProducto";
+import { PasarIndex } from "./MenuGestion/ModificarProducto/PasarIndex";
+
 export const ModificarProducto = () => {
     return (
         <div>
-            <h2>Modificar Producto</h2>
+            <PasarIndex />
         </div>
     );
 }
