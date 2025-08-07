@@ -2,7 +2,7 @@
 
 import { ObtenerIndexProps } from "@/app/interfaces/ObtenerIndexProps";
 
-export const MostrarProducto = ({productos, obtenerIndex}: ObtenerIndexProps) => {
+export const MostrarProducto = ({productos, obtenerIndex, eliminarProducto}: ObtenerIndexProps) => {
     return (
         <>  
             <h1>GESTION DE PRODUCTOS</h1>
@@ -20,7 +20,7 @@ export const MostrarProducto = ({productos, obtenerIndex}: ObtenerIndexProps) =>
                                         onClick={()=>obtenerIndex(producto, index)}>Modificar
                                     </button>
                                     <button
-                                        >ELIMINAR
+                                        onClick={()=>eliminarProducto(index)}>ELIMINAR
                                     </button>
                                 </td>
                             </tr>

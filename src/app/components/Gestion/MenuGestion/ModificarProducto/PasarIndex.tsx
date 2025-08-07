@@ -2,7 +2,8 @@ import { ProductoInterface } from "@/app/interfaces/ProductoInterface"
 import MostrarProducto from "./MostrarProducto"
 import EditarProducto from "./EditarProducto"
 import {useEffect, useState } from "react"
-import { obtenerProductos } from "@/app/firebase/Promesas"
+import { eliminarProducto, obtenerID, obtenerProductos } from "@/app/firebase/Promesas"
+import { InterfaceID } from "@/app/interfaces/InterfaceID"
 
 const InitialStateProducto:ProductoInterface = {
     nombre: "",
@@ -16,6 +17,7 @@ export const PasarIndex = () => {
     const [Producto, setProducto] = useState(InitialStateProducto)
     const [IndexFila, setIndexFila] = useState(Number)
     const [IsOpen, setIsOpen] = useState(false)
+    const [AlmacenarIDS, setAlmacenarIDS] = useState<InterfaceID[]>([]);
 
     const handleGuardarIndex = (producto:ProductoInterface, index: number) => {
         setProducto(producto);
@@ -27,8 +29,33 @@ export const PasarIndex = () => {
 
     useEffect(() => {
         cargarProductos();
+        cargarIDs();
     }, []);
-    
+
+    const cargarIDs = () => {
+        obtenerID().then(setAlmacenarIDS)
+        .catch((error) => {
+            alert("Error al cargar los IDs")
+            console.log(error)
+        });
+    };
+
+    const handleEliminarProducto = (index: number) => {
+        const id = AlmacenarIDS[index];
+        if (!id) {
+            alert("No se encontró el ID del producto");
+            return;
+        }
+        eliminarProducto(id).then(() => {
+            alert("Producto eliminado correctamente");
+            cargarProductos();
+            cargarIDs();
+        }).catch((error) => {
+            alert("Error al eliminar el producto");
+            console.log(error);
+        });
+    };
+
     const cargarProductos = () => {
         obtenerProductos().then(setProductos)
         .catch((error) => {
@@ -45,7 +72,11 @@ export const PasarIndex = () => {
 
     return (
         <div>
-            <MostrarProducto productos={Productos} obtenerIndex={handleGuardarIndex}/>
+            <MostrarProducto 
+                productos={Productos} 
+                obtenerIndex={handleGuardarIndex}
+                eliminarProducto={handleEliminarProducto}
+            />
             {IsOpen && IndexFila !== null && (
                 <EditarProducto 
                     isOpen={IsOpen} 
