@@ -2,11 +2,18 @@ import {doc, collection, addDoc, getDocs, updateDoc, deleteDoc} from "firebase/f
 import { db } from "./Conexion";
 import { ProductoInterface } from "../interfaces/ProductoInterface";
 import { InterfaceID } from "../interfaces/InterfaceID";
+import { FacturaInterface } from "../interfaces/Venta/FacturaInterface";
 
 export const registrarProducto = async(producto:ProductoInterface)=> {
     const docRef = await addDoc(collection(db, "Productos"), producto);
     console.log("Producto registrado con ID: ", docRef.id);
 }
+
+export const registrarFactura = async(factura:FacturaInterface)=> {
+    const docRef = await addDoc(collection(db, "Facturas"), factura);
+    console.log("Factura registrada con ID: ", docRef.id);
+}
+
 
 
 export const obtenerProductos = async () => {

@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from "react";
 import { InterfaceAlmacenarQR } from "@/app/interfaces/Venta/InterfaceAlmacenarQR";
-import { obtenerProductos } from "@/app/firebase/Promesas";
+import { obtenerProductos, registrarFactura } from "@/app/firebase/Promesas";
 import { ProductoInterface } from "@/app/interfaces/ProductoInterface";
 
 const InitialStateAlmacenarQR: InterfaceAlmacenarQR = {
@@ -16,7 +16,13 @@ export const VentaComponent = ()=>{
     const [ProductosRecuperados, setProductosRecuperados] = useState<ProductoInterface[]>([]);
     const [ProductoEncontrado, setProductoEncontrado] = useState(false)
     const [ProductosAgregados, setProductosAgregados] = useState<ProductoInterface[]>([]);
-
+    const [PrecioTotal, setPrecioTotal] = useState(0);
+    const [Factura, setFactura] = useState({
+        fecha: new Date().toLocaleDateString(),
+        hora: new Date().toLocaleTimeString(),
+        productos: [] as ProductoInterface[],
+        total: 0
+    });
 
     useEffect(() => {
         obtenerProductos().then((productos) => {
@@ -54,14 +60,38 @@ export const VentaComponent = ()=>{
         if (productoFiltrado) {
             if (!ProductosAgregados.some(producto => producto.codigoQR === productoFiltrado.codigoQR)) {
                 setProductosAgregados([...ProductosAgregados, productoFiltrado]);
+                ProductosAgregados.some(producto => producto.precio === productoFiltrado.codigoQR) 
+                setPrecioTotal(PrecioTotal => PrecioTotal + Number(productoFiltrado.precio));
+                setAlmacenarQR({codigoQR: ""});
+                setFactura({
+                    ...Factura,
+                    productos: [...Factura.productos, productoFiltrado],
+                    total: Factura.total + Number(productoFiltrado.precio)
+                });
             } else {
                 setProductosAgregados([...ProductosAgregados, productoFiltrado]);
+                setPrecioTotal(PrecioTotal => PrecioTotal + Number(productoFiltrado.precio));
+                setAlmacenarQR({codigoQR: ""});
+                setFactura({
+                    ...Factura,
+                    productos: [...Factura.productos, productoFiltrado],
+                    total: Factura.total + Number(productoFiltrado.precio)
+                });
             }
         } else {
             alert("Producto no encontrado.");
+            setAlmacenarQR({codigoQR: ""});
         }
     }
 
+    const handleSubirFactura = () => {
+        registrarFactura(Factura).then(() => {
+            alert("Factura registrada correctamente.");
+        }).catch((error) => {
+            console.error("Error al registrar la factura:", error);
+            alert("Error al registrar la factura.");
+        })
+    }
 
 
     return (
@@ -74,9 +104,23 @@ export const VentaComponent = ()=>{
                         name="codigoQR" 
                         placeholder="QR"
                         onChange={(e)=>handleAlmacenarQR(e.currentTarget.name, e.currentTarget.value)}
+                        value={AlmacenarQR.codigoQR}
+                        onKeyDown={(e)=>{
+                            if (e.key === 'Enter') {
+                                e.preventDefault();
+                                handleAgregarProducto();
+            
+                            }
+                        }}
                     /> <br />
                     <span>INGRESE EL CODIGO DE BARRAS</span>
                 </form>
+                {PrecioTotal > 0 && (
+                    <>
+                        <h2>PRECIO TOTAL: {PrecioTotal}</h2>
+                        <button onClick={()=>{handleSubirFactura()}}>COMPLETAR VENTA</button>
+                    </>
+                )}
                 {productoFiltrado && (
                     <table>
                         <tbody>
