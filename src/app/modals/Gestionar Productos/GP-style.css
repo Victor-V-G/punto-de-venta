@@ -1,0 +1,56 @@
+
+.div-pwd-principal{
+    background-color: white;
+    width: 50%;
+    margin-left: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    
+}
+
+.div-pwd-input{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-pwd{
+    width: 50%;
+    height: 50px;
+    background-color: #EBECF2;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button-pwd:hover{
+    background-color: #D1D5DB;
+    border: #EBECF2;
+}
+
+.input-pwd{
+    width: 50%;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid #D1D5DB;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.div-pwd-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+

@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { useState } from 'react'
 import VentaModals from './modals/modalsPrincipales/VentaModals'
 import InicioModals from './modals/modalsPrincipales/InicioModals'
-import GestionarProductosModals from './modals/modalsPrincipales/GestionarProductosModals'
+import GestionarProductosModals from './modals/Gestionar Productos/GestionarProductosModals'
 import VerStockModals from './modals/modalsPrincipales/VerStockModals'
 import HistorialDeVentaModals from './modals/modalsPrincipales/HistorialDeVentaModals'
 
@@ -65,23 +65,6 @@ export default function Home() {
             <button 
               className='sidebar-button'
               onClick={()=>{
-                setIsOpenVerStock(true);
-                setIsOpenInicio(false);
-                setIsOpenVenta(false);
-                setIsOpenHistorialDeVenta(false);
-                setIsOpenGestionarProductos(false);
-                setValid(false)                  
-              }}>
-              <Image
-                className='sidebarImg'
-                src={packageImg}
-                alt='clipboard'              
-              />
-              <span>VER STOCK</span>
-            </button> <br />
-            <button 
-              className='sidebar-button'
-              onClick={()=>{
                 setIsOpenHistorialDeVenta(true);
                 setIsOpenInicio(false);
                 setIsOpenVenta(false);
@@ -129,10 +112,6 @@ export default function Home() {
           <VentaModals
             isOpen={IsOpenVenta}
             setClose={()=>setIsOpenVenta(false)}
-          />
-          <VerStockModals
-            isOpen={IsOpenVerStock}
-            setClose={()=>setIsOpenVerStock(false)}
           />
           <HistorialDeVentaModals
             isOpen={IsOpenHistorialDeVenta}

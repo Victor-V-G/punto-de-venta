@@ -1,0 +1,95 @@
+/* Contenedor principal */
+.venta-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Titulos */
+.venta-container h1, .venta-container h2 {
+  color: #2d3748;
+  text-align: center;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+/* Formulario */
+.venta-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.venta-form input[type="number"] {
+  width: 250px;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s;
+  margin-bottom: 6px;
+}
+
+.venta-form input[type="number"]:focus {
+  border-color: #2d3748;
+  outline: none;
+}
+
+.venta-form span {
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 14px;
+}
+
+/* Tablas */
+.venta-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.venta-table td {
+  border: 1px solid #ddd;
+  padding: 10px 12px;
+  text-align: center;
+  color: #2d3748;
+}
+
+.venta-table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.venta-table tr:nth-child(odd) {
+  background-color: #e9ecef;
+}
+
+/* Botones */
+.venta-button {
+  background-color: #2d3748;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+}
+
+.venta-button:hover {
+  background-color: #1a202c;
+}
+
+/* Precio total */
+.precio-total {
+  font-weight: 700;
+  color: #2d3748;
+  font-size: 20px;
+  text-align: center;
+}

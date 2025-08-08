@@ -1,23 +1,30 @@
 'use client'
-
+import '../assets/css/MP-style.css'
 import { ObtenerIndexProps } from "@/app/interfaces/ObtenerIndexProps";
 
 export const MostrarProducto = ({productos, obtenerIndex, eliminarProducto}: ObtenerIndexProps) => {
     return (
         <>  
-            <h1>GESTION DE PRODUCTOS</h1>
-            <table>
+            
+            <table className="table-mp">
                 <tbody>
+                    <tr>
+                        <td>NOMBRE DEL PRODUCTO</td>
+                        <td>CODIGO DE BARRAS</td>
+                        <td>PRECIO</td>
+                        <td>STOCK</td>
+                        <td>ACCIONES</td>
+                    </tr>
                     {
                         productos.map((producto, index) => (
                             <tr key={index}>
-                                <td>NOMBRE DEL PRODUCTO: {producto.nombre}</td> 
-                                <td>CODIGO QR {producto.codigoQR}</td>
-                                <td>PRECIO {producto.precio}</td>
-                                <td>CANTIDAD {producto.cantidad}</td>
+                                <td>{producto.nombre}</td> 
+                                <td>{producto.codigoQR}</td>
+                                <td>{producto.precio}</td>
+                                <td>{producto.cantidad}</td>
                                 <td>
                                     <button
-                                        onClick={()=>obtenerIndex(producto, index)}>Modificar
+                                        onClick={()=>obtenerIndex(producto, index)}>MODIFICAR
                                     </button>
                                     <button
                                         onClick={()=>eliminarProducto(index)}>ELIMINAR

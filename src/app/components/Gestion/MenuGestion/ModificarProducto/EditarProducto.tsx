@@ -4,6 +4,7 @@ import { PropsExtendsEditarProductoModals } from "@/app/interfaces/extends/Props
 import { InterfaceID } from "@/app/interfaces/InterfaceID";
 import { ProductoInterface } from "@/app/interfaces/ProductoInterface";
 import { useEffect, useState } from "react";
+import '../assets/css/MP-style.css'
 
 const InitialStateProducto:ProductoInterface = {
     nombre: "",
@@ -55,39 +56,47 @@ export const EditarProducto = ({isOpen, setClose, producto, index}:PropsExtendsE
     } else {
         return (
             <>
-                <form>
-                    <h2>MODIFICAR PRODUCTO</h2>
-                    <input 
-                        type="text" 
-                        name="nombre" 
-                        value={Producto.nombre}
-                        onChange={(e)=>handleRegistrarEdicion(e.currentTarget.name,e.currentTarget.value)}
-                    />
-                    <input 
-                        type="number" 
-                        name="codigoQR" 
-                        value={Producto.codigoQR}
-                        onChange={(e)=>handleRegistrarEdicion(e.currentTarget.name,e.currentTarget.value)}
-                    />
-                    <input 
-                        type="number" 
-                        name="precio" 
-                        value={Producto.precio}
-                        onChange={(e)=>handleRegistrarEdicion(e.currentTarget.name,e.currentTarget.value)}
-                    />
-                    <input 
-                        type="number" 
-                        name="cantidad" 
-                        value={Producto.cantidad}
-                        onChange={(e)=>handleRegistrarEdicion(e.currentTarget.name,e.currentTarget.value)}
-                    />
-                </form>
-                <button
-                    onClick={(e)=>{
-                        e.preventDefault();
-                        handleModificarProducto();
-                    }}>MODIFICAR</button>
-                <button onClick={setClose}>CERRAR MODALS</button>
+                <div className="modal-overlay">
+                    <div className="modal-container">
+                        <form className="form-ep">
+                            <span>NOMBRE DEL PRODUCTO</span>
+                            <input 
+                                type="text" 
+                                name="nombre" 
+                                value={Producto.nombre}
+                                onChange={(e)=>handleRegistrarEdicion(e.currentTarget.name,e.currentTarget.value)}
+                            /> <br />
+                            <span>CODIGO DE BARRAS</span>
+                            <input 
+                                type="number" 
+                                name="codigoQR" 
+                                value={Producto.codigoQR}
+                                onChange={(e)=>handleRegistrarEdicion(e.currentTarget.name,e.currentTarget.value)}
+                            /> <br />
+                            <span>PRECIO</span>
+                            <input 
+                                type="number" 
+                                name="precio" 
+                                value={Producto.precio}
+                                onChange={(e)=>handleRegistrarEdicion(e.currentTarget.name,e.currentTarget.value)}
+                            /> <br />
+                            <span>STOCK</span>
+                            <input 
+                                type="number" 
+                                name="cantidad" 
+                                value={Producto.cantidad}
+                                onChange={(e)=>handleRegistrarEdicion(e.currentTarget.name,e.currentTarget.value)}
+                            />
+                            <button
+                                onClick={(e)=>{
+                                    e.preventDefault();
+                                    handleModificarProducto();
+                                }}>MODIFICAR</button>
+                            <button onClick={setClose}>CANCELAR Y VOLVER</button>
+                        </form>
+
+                    </div>
+                </div>
             </>
 
         );

@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { ProductoInterface } from "@/app/interfaces/ProductoInterface";
 import { registrarProducto } from "@/app/firebase/Promesas";
+import './MenuGestion/assets/css/RP-style.css'
 
 const InitialStateProductos:ProductoInterface = {
     nombre: "",
@@ -31,7 +32,7 @@ export const RegistrarProductos = () => {
 
 
     return (
-        <div>
+        <div className="div-rp-principal">
             <h1>REGISTRAR PRODUCTOS</h1> <br />
             <div>
                 <form>
@@ -40,6 +41,7 @@ export const RegistrarProductos = () => {
                         type="text" 
                         name="nombre"
                         placeholder="Nombre del producto"
+                        className="input-rp"
                         value={Productos.nombre}
                         onChange={(e)=>handleProducto(e.currentTarget.name,e.currentTarget.value)}
                     />
@@ -48,6 +50,7 @@ export const RegistrarProductos = () => {
                         type="number" 
                         name="codigoQR"
                         placeholder="Codigo del producto"
+                        className="input-rp"
                         value={Productos.codigoQR}
                         onChange={(e)=>handleProducto(e.currentTarget.name,e.currentTarget.value)} 
                     />
@@ -56,6 +59,7 @@ export const RegistrarProductos = () => {
                         type="number" 
                         name="precio"
                         placeholder="Precio del producto"
+                        className="input-rp"
                         value={Productos.precio}
                         onChange={(e)=>handleProducto(e.currentTarget.name,e.currentTarget.value)}
                     />
@@ -64,11 +68,13 @@ export const RegistrarProductos = () => {
                         type="number" 
                         name="cantidad"
                         placeholder="Cantidad del producto" 
+                        className="input-rp"
                         value={Productos.cantidad}
                         onChange={(e)=>handleProducto(e.currentTarget.name,e.currentTarget.value)}
                     />
                     <br />
                     <button
+                        className="button-rp"
                         disabled={Productos.nombre === "" || Productos.codigoQR === "" || Productos.precio === "" || Productos.cantidad === ""}
                         onClick={(e)=>{
                             handleRegistrarProducto();

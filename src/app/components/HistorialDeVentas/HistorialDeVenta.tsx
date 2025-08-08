@@ -1,6 +1,7 @@
 import { obtenerFacturas } from "@/app/firebase/Promesas"
 import { FacturaInterface } from "@/app/interfaces/Venta/FacturaInterface";
 import { useEffect, useState } from "react"
+import './assets/css/HV-style.css'
 
 export const HistorialDeVentas = () => {
 
@@ -16,24 +17,31 @@ export const HistorialDeVentas = () => {
 
     return (
         <>
-            <h1>GESTION DE PRODUCTOS</h1>
-            <table>
+            <table className="table-hv">
                 <tbody>
+                    <tr>
+                        <td>FECHA:</td>
+                        <td>HORA</td>
+                        <td>PRODUCTO</td>
+                        <td>TOTAL</td>
+                    </tr>
                     {
                         Facturas.map((facturas, index) => (
                             <tr key={index}>
-                                <td>FECHA: {facturas.fecha}</td> 
-                                <td>HORA: {facturas.hora}</td>
-                                <td>PRODUCTO: {facturas.productos.map((producto, index)=>{
-                                    return (
-                                        <span key={index}><br />
-                                            NOMBRE: {producto.nombre} <br />
-                                            PRECIO: {producto.precio}
-                                        </span>
-                                    )
-                                    })}
+                                <td>{facturas.fecha}</td> 
+                                <td>{facturas.hora}</td>
+                                <td>{facturas.productos.map((producto, index)=>(
+                                    <table key={index} className="producto-tabla">
+                                        <tbody>
+                                            <tr>
+                                                <td className="producto-nombre">NOMBRE: {producto.nombre}</td>
+                                                <td className="producto-precio">PRECIO: ${producto.precio}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                ))}
                                 </td>
-                                <td>TOTAL: {facturas.total}</td>
+                                <td className="total-cell">TOTAL: ${facturas.total}</td>
                             </tr>
                         ))
                     }

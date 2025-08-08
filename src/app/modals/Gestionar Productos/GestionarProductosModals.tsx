@@ -5,6 +5,7 @@ import { ValidPropsExtends } from "../../interfaces/extends/ValidPropsExtends";
 import MenuGestionarTiendaModals from "../modalsGestion/MenuGestionarTiendaModals";
 import RegistrarProductoModals from "../modalsGestion/RegistrarProductoModals";
 import ModificarProductoModals from "../modalsGestion/ModificarProductoModals";
+import './GP-style.css'
 
 const InitialStatePassword:PasswordInterface={
     password:"",
@@ -83,24 +84,28 @@ export const GestionarProductosModals = ({isOpen, Valid, setValid} : ValidPropsE
 
     return (
         <div className="div-pwd-principal">
-            <div>
-                <h1>GESTIONAR TIENDA</h1> <br />
-                <h3>INGRESE LA CONTRASEÑA PARA ACCEDER AL PANEL</h3>
+            <div className="div-pwd-title">
+                <h2>INGRESE LA CONTRASEÑA PARA ACCEDER AL PANEL</h2>
             </div>
 
-            <div>
-                <label>Contraseña</label>
+            <div className="div-pwd-input">
                 <input 
                     type="text" 
                     name="password" 
                     placeholder="ingresa la contraseña"
-                    className="pwd-input"
+                    className="input-pwd"
+                    autoFocus
                     onChange={(e)=>handlePassword(e.currentTarget.name,e.currentTarget.value)}
+                    onKeyDown={(e)=>{
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            handleCheck();
+                        }}}
                 />
-                <span>{}</span>
                 <button
-                    className="pwd-button"
-                    onClick={()=>{
+                    className="button-pwd"
+                    onClick={(e)=>{
+                        e.preventDefault()
                         handleCheck()
                     }}>Ingresar
                 </button>

@@ -38,24 +38,6 @@ export const InicioComponent = ({setIsOpenInicio, setIsOpenVenta, setIsOpenStock
                     <button 
                         className='acceso-rapido-boton'
                         onClick={()=>{
-                            setIsOpenStock(true);
-                            setIsOpenInicio(false);
-                            setIsOpenVenta(false)
-                            setIsOpenHistorialDeVenta(false);
-                            setIsOpenGestionarProductos(false);
-                        }}>
-                        <Image
-                            className='acceso-rapido-img'
-                            src={packageImg}
-                            alt='stock'
-                        />
-                        <span>VER STOCK</span>                    
-                    </button>
-                </div>
-                <div>
-                    <button 
-                        className='acceso-rapido-boton'
-                        onClick={()=>{
                             setIsOpenHistorialDeVenta(true);
                             setIsOpenInicio(false);
                             setIsOpenVenta(false);

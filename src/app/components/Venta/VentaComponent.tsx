@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { InterfaceAlmacenarQR } from "@/app/interfaces/Venta/InterfaceAlmacenarQR";
 import { obtenerProductos, registrarFactura } from "@/app/firebase/Promesas";
 import { ProductoInterface } from "@/app/interfaces/ProductoInterface";
+import './assets/css/VC-style.css'
 
 const InitialStateAlmacenarQR: InterfaceAlmacenarQR = {
     codigoQR: "",
@@ -96,61 +97,69 @@ export const VentaComponent = ()=>{
 
     return (
             <>
-                <h1>REALIZAR VENTA {AlmacenarQR.codigoQR}</h1>
-                <form>
-                    <h1>ESCANEAR PRODUCTO</h1>
-                    <input 
-                        type="number" 
-                        name="codigoQR" 
-                        placeholder="QR"
-                        onChange={(e)=>handleAlmacenarQR(e.currentTarget.name, e.currentTarget.value)}
-                        value={AlmacenarQR.codigoQR}
-                        onKeyDown={(e)=>{
-                            if (e.key === 'Enter') {
-                                e.preventDefault();
-                                handleAgregarProducto();
-            
-                            }
-                        }}
-                    /> <br />
-                    <span>INGRESE EL CODIGO DE BARRAS</span>
-                </form>
-                {PrecioTotal > 0 && (
-                    <>
-                        <h2>PRECIO TOTAL: {PrecioTotal}</h2>
-                        <button onClick={()=>{handleSubirFactura()}}>COMPLETAR VENTA</button>
-                    </>
-                )}
-                {productoFiltrado && (
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>NOMBRE DEL PRODUCTO: {productoFiltrado.nombre}</td> 
-                                <td>CODIGO QR {productoFiltrado.codigoQR}</td>
-                                <td>PRECIO {productoFiltrado.precio}</td>
-                                <td>CANTIDAD {productoFiltrado.cantidad}</td>
-                                <td>
-                                    <button onClick={handleAgregarProducto}>AGREGAR</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                )}
-                {ProductosAgregados.length > 0 && (
-                    <>
-                        <h2>PRODUCTOS AGREGADOS A LA VENTA</h2>
-                        <table>
+                <div className="venta-container">
+                    <h1>REALIZAR VENTA</h1>
+                    <form className="venta-form">
+                        <span>INGRESE EL CODIGO DE BARRAS</span> <br />
+                        <input 
+                            type="number" 
+                            name="codigoQR" 
+                            placeholder="QR"
+                            onChange={(e)=>handleAlmacenarQR(e.currentTarget.name, e.currentTarget.value)}
+                            value={AlmacenarQR.codigoQR}
+                            onKeyDown={(e)=>{
+                                if (e.key === 'Enter') {
+                                    e.preventDefault();
+                                    handleAgregarProducto();
+                
+                                }
+                            }}
+                        />
+                    </form>
+                    {productoFiltrado && (
+                        <table className="venta-table">
                             <tbody>
-                                {ProductosAgregados.map((producto, index) => (
-                                    <tr key={index}>
-                                        <td>NOMBRE DEL PRODUCTO: {producto.nombre}</td>
-                                        <td>PRECIO: {producto.precio}</td>
-                                    </tr>
-                                ))}
+                                <tr>
+                                    <td>NOMBRE DEL PRODUCTO: {productoFiltrado.nombre}</td> 
+                                    <td>CODIGO QR {productoFiltrado.codigoQR}</td>
+                                    <td>PRECIO {productoFiltrado.precio}</td>
+                                    <td>CANTIDAD {productoFiltrado.cantidad}</td>
+                                    <td>
+                                        <button
+                                            className="venta-button"
+                                            onClick={handleAgregarProducto}>AGREGAR
+                                        </button>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
-                    </>
-                )}
+                    )} <br />
+                    {ProductosAgregados.length > 0 && (
+                        <>
+                            <h2>PRODUCTOS AGREGADOS A LA VENTA</h2>
+                            <table className="venta-table">
+                                <tbody>
+                                    {ProductosAgregados.map((producto, index) => (
+                                        <tr key={index}>
+                                            <td>NOMBRE DEL PRODUCTO: {producto.nombre}</td>
+                                            <td>PRECIO: {producto.precio}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </>
+                    )} <br />
+                    {PrecioTotal > 0 && (
+                        <>
+                            <h2 className="precio-total">PRECIO TOTAL: ${PrecioTotal}</h2>
+                            <button 
+                                className="venta-button" 
+                                onClick={()=>{
+                                    handleSubirFactura()}}>COMPLETAR VENTA
+                            </button>
+                        </>
+                    )}
+                </div>
             </>
     )
 }
