@@ -9,12 +9,6 @@ export const registrarProducto = async(producto:ProductoInterface)=> {
     console.log("Producto registrado con ID: ", docRef.id);
 }
 
-export const registrarFactura = async(factura:FacturaInterface)=> {
-    const docRef = await addDoc(collection(db, "Facturas"), factura);
-    console.log("Factura registrada con ID: ", docRef.id);
-}
-
-
 
 export const obtenerProductos = async () => {
     let listadoObtenido: ProductoInterface[]  = []
@@ -63,4 +57,26 @@ export const modificarProducto = async(id:InterfaceID,nuevosDatos:ProductoInterf
 export const eliminarProducto = async(id:InterfaceID) => {
     await deleteDoc(doc(db, "Productos", id.idDocumento));
     console.log("Producto eliminado con ID: ", id.idDocumento);
+}
+
+
+export const registrarFactura = async(factura:FacturaInterface)=> {
+    const docRef = await addDoc(collection(db, "Facturas"), factura);
+    console.log("Factura registrada con ID: ", docRef.id);
+}
+
+export const obtenerFacturas = async () => {
+    let listadoFacturas: FacturaInterface[]  = []
+        const querySnapshot = await getDocs(collection(db, "Facturas"));
+        querySnapshot.forEach((doc) => {
+        let facturas:FacturaInterface = {
+            fecha: doc.data().fecha,
+            hora: doc.data().hora,
+            productos: doc.data().productos,
+            total: doc.data().total,
+        }
+        listadoFacturas.push(facturas);
+        console.log(doc.id, " => ", doc.data());
+    });
+return listadoFacturas;
 }

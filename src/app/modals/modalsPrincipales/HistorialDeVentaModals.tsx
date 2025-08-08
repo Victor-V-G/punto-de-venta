@@ -1,4 +1,5 @@
 'use client'
+import HistorialDeVentas from "@/app/components/HistorialDeVentas/HistorialDeVenta";
 import { ModalsInterface } from "../../interfaces/ModalsInterface";
 
 export const HistorialDeVentaModals = ({isOpen}: ModalsInterface)=>{
@@ -7,7 +8,7 @@ export const HistorialDeVentaModals = ({isOpen}: ModalsInterface)=>{
     } else {
         return (
             <div>
-                <h1>HISTORIAL DE VENTA</h1>
+                <HistorialDeVentas />
             </div>
         )
     }

@@ -65,7 +65,7 @@ export const VentaComponent = ()=>{
                 setAlmacenarQR({codigoQR: ""});
                 setFactura({
                     ...Factura,
-                    productos: [...Factura.productos, productoFiltrado],
+                    productos: [productoFiltrado, ...Factura.productos],
                     total: Factura.total + Number(productoFiltrado.precio)
                 });
             } else {

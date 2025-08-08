@@ -1,3 +1,4 @@
+
 import { ModalsInterface } from "../../interfaces/ModalsInterface";
 
 export const VerStockModals = ({isOpen} : ModalsInterface )=>{
