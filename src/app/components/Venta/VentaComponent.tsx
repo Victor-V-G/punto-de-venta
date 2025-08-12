@@ -95,6 +95,29 @@ export const VentaComponent = ()=>{
     }
 
 
+    const handleEliminarProducto = (index: number) => {
+        const productoAEliminar = ProductosAgregados[index];
+        if (!productoAEliminar) return;
+
+        // Eliminar solo el producto en la posición indicada
+        const nuevosProductosAgregados = [...ProductosAgregados];
+        nuevosProductosAgregados.splice(index, 1);
+
+        const nuevosProductosFactura = [...Factura.productos];
+        nuevosProductosFactura.splice(index, 1);
+
+        // Actualizar estados
+        setProductosAgregados(nuevosProductosAgregados);
+        setPrecioTotal(prev => prev - Number(productoAEliminar.precio));
+        setFactura({
+            ...Factura,
+            productos: nuevosProductosFactura,
+            total: Factura.total - Number(productoAEliminar.precio)
+        });
+    };
+
+
+
     return (
             <>
                 <div className="venta-container">
@@ -143,6 +166,12 @@ export const VentaComponent = ()=>{
                                         <tr key={index}>
                                             <td>NOMBRE DEL PRODUCTO: {producto.nombre}</td>
                                             <td>PRECIO: {producto.precio}</td>
+                                            <td>
+                                                <button
+                                                    className="venta-button"
+                                                    onClick={()=>handleEliminarProducto(index)}>ELIMINAR
+                                                </button>
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>
