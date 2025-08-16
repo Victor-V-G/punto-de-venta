@@ -1,12 +1,20 @@
 'use client'
 import { useState, useEffect } from "react";
 import { InterfaceAlmacenarQR } from "@/app/interfaces/Venta/InterfaceAlmacenarQR";
-import { obtenerProductos, registrarFactura } from "@/app/firebase/Promesas";
+import { modificarStock, obtenerID, obtenerProductos, registrarFactura } from "@/app/firebase/Promesas";
 import { ProductoInterface } from "@/app/interfaces/ProductoInterface";
 import './assets/css/VC-style.css'
+import { InterfaceID } from "@/app/interfaces/InterfaceID";
 
 const InitialStateAlmacenarQR: InterfaceAlmacenarQR = {
     codigoQR: "",
+}
+
+const InitialStateProductos: ProductoInterface = {
+    nombre : "",
+    codigoQR : "",
+    precio : "",
+    cantidad : ""
 }
 
 
@@ -24,6 +32,20 @@ export const VentaComponent = ()=>{
         productos: [] as ProductoInterface[],
         total: 0
     });
+    const [pr, setpr] = useState(InitialStateProductos)
+    const [AlmacenarIDS, setAlmacenarIDS] = useState<InterfaceID[]>([])
+
+
+    useEffect(() => {
+        obtenerID().then((ids) => {
+            setAlmacenarIDS(ids);
+            console.log("IDs obtenidos:", ids);
+        }).catch((error) => {
+            alert("Error al obtener los IDs de los productos: ")
+            console.log(error)
+        })
+    }, [])
+
 
     useEffect(() => {
         obtenerProductos().then((productos) => {
@@ -33,7 +55,7 @@ export const VentaComponent = ()=>{
             console.error("Error al obtener productos:", error);
         });
     }, [])
-    
+
 
     const handleAlmacenarQR = (name:string,value:string) => {
         setAlmacenarQR(
@@ -80,21 +102,53 @@ export const VentaComponent = ()=>{
                 });
             }
         } else {
-            alert("Producto no encontrado.");
-            setAlmacenarQR({codigoQR: ""});
+            alert("Producto no encontrado.")
+            setAlmacenarQR({codigoQR: ""})
         }
     }
 
     const handleSubirFactura = () => {
         registrarFactura(Factura).then(() => {
-            alert("Factura registrada correctamente.");
+
+            // Creamos un array local de las cantidades actuales
+            const stockActual = ProductosRecuperados.map(p => Number(p.cantidad));
+
+            // Recorremos los productos de la factura
+            Factura.productos.forEach((producto) => {
+                const index = ProductosRecuperados.findIndex(p => p.codigoQR === producto.codigoQR);
+                if (index !== -1) {
+                    const idProducto = AlmacenarIDS[index];
+
+                    // Restar 1 del stock local y actualizar en Firestore
+                    stockActual[index] = stockActual[index] - 1;
+
+                    modificarStock(idProducto, {
+                        ...ProductosRecuperados[index],
+                        cantidad: stockActual[index].toString()
+                    })
+                    .then(() => console.log(`Stock actualizado para: ${producto.nombre}`))
+                    .catch((error) => console.error("Error al modificar stock:", error));
+                }
+            });
+
+            alert("Factura registrada y stock actualizado correctamente.");
+
+            // Limpiar estados
+            setProductosAgregados([]);
+            setPrecioTotal(0);
+            setFactura({
+                ...Factura,
+                productos: [],
+                total: 0
+            });
+
         }).catch((error) => {
             console.error("Error al registrar la factura:", error);
             alert("Error al registrar la factura.");
-        })
-    }
+        });
+    };
 
-
+    
     const handleEliminarProducto = (index: number) => {
         const productoAEliminar = ProductosAgregados[index];
         if (!productoAEliminar) return;
@@ -116,7 +170,16 @@ export const VentaComponent = ()=>{
         });
     };
 
+    const index = 0
+    const poscicion = AlmacenarIDS.slice(index, index + 1);
 
+    const handleModificarStock = () =>{
+        modificarStock(poscicion[0], pr).then(() => {
+            alert("Se modifico el stock")
+        }).catch((error) =>{
+            console.log(error)
+        })
+    }
 
     return (
             <>
@@ -128,6 +191,7 @@ export const VentaComponent = ()=>{
                             type="number" 
                             name="codigoQR" 
                             placeholder="QR"
+                            autoFocus
                             onChange={(e)=>handleAlmacenarQR(e.currentTarget.name, e.currentTarget.value)}
                             value={AlmacenarQR.codigoQR}
                             onKeyDown={(e)=>{

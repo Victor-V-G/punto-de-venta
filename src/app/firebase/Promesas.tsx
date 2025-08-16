@@ -80,3 +80,12 @@ export const obtenerFacturas = async () => {
     });
 return listadoFacturas;
 }
+
+export const modificarStock = async(id:InterfaceID, nuevosDatos:ProductoInterface) => {
+    const docRef = doc(db, "Productos", id.idDocumento);
+    await updateDoc(docRef, {
+        cantidad: nuevosDatos.cantidad,
+    });
+    console.log("Stock producto modificado con ID: ", id.idDocumento);
+}
+
